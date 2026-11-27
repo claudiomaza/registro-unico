@@ -24,7 +24,7 @@ Cada usuario activo necesita permiso de edición en la planilla porque el web ap
 
 ### Entrada Pages
 
-Título Registro Único, breve explicación y botón al deployment estable de HtmlService. No hay formulario de credenciales ni integración GIS. URL de Apps Script reemplazada manualmente.
+Título Registro Único, breve explicación y botón al deployment de HtmlService entregado por Claudio. No hay formulario de credenciales ni integración GIS; la autenticación ocurre en Google Apps Script.
 
 ### CRUD HtmlService (`/exec`)
 
@@ -82,6 +82,6 @@ El navegador no puede establecer identidad ni rol enviando campos. AppScript obt
 
 ## Despliegue y aceptación
 
-Pages publica solo `Registro Único/frontend/`, no Apps Script. Claudio autorizó repo público para Pages. No publicar datos reales, IDs de hojas ni secretos; la landing estática muestra botón inactivo hasta tener la URL real de Apps Script. Apps Script se copia/publica manualmente por Claudio; no se usa clasp por agente. Compatibilidad depende de URL `/exec` y contrato v1.
+Pages publica solo `Registro Único/frontend/`, no Apps Script. Claudio autorizó repo público para Pages. No publicar datos reales, IDs de hojas ni secretos; la landing enlaza al deployment `/exec` que Claudio proporcionó. Apps Script se copia/publica manualmente por Claudio; no se usa clasp por agente. Compatibilidad depende de URL `/exec` y contrato v1.
 
 PASS completo requiere fuente sincronizada, tests, aprobación de scopes, prueba con sheet sintética y cuentas reales de prueba, navegador móvil/escritorio, verificación de revocación y SHA publicado. Hasta despliegue/prueba manual, runtime Apps Script, OAuth, CORS/redirecciones, ACL Google y QA visual son `BLOCKED/NO VERIFICADO`. Sin datos reales ni despliegues como parte del desarrollo inicial.

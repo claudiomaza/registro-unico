@@ -6,7 +6,7 @@
 - Carpeta canónica: `Registro Único/` (espacio y tilde incluidos).
 - `main` es la rama integrada. Mantener una sola rama de desarrollo local, `dev`; no crear ramas feature adicionales ni publicar Apps Script desde el agente.
 - `appscript/` es fuente manual del backend y ambas pantallas HtmlService. No crear, actualizar ni desplegar Apps Script como agente.
-- `frontend/` es fuente de la página de entrada estática; workflow raíz `.github/workflows/pages.yml` publica solo esta carpeta. Despliegue Pages separado. Repo público por autorización expresa de Claudio (2026-11-26); no agregar datos reales, IDs de hojas ni credenciales. Landing permanece inactiva hasta configurar la URL real de Apps Script.
+- `frontend/` es fuente de la página de entrada estática; workflow raíz `.github/workflows/pages.yml` publica solo esta carpeta. Despliegue Pages separado. Repo público por autorización expresa de Claudio (2026-11-26); no agregar datos reales, IDs de hojas ni credenciales. Landing enlaza al deployment de Apps Script informado por Claudio.
 - No leer ni escribir datos reales, no ejecutar migraciones y no cambiar permisos de planillas reales en desarrollo. Usar fixtures/sheets sintéticas aisladas.
 
 ## Diseño vigente
@@ -45,6 +45,6 @@ Funciones cliente/servidor públicas: `apiBootstrap`, `apiListRecords`, `apiSave
 ## Configuración/rollback manual
 
 - Deployment activo: verificar en Apps Script editor que ejecuta como quien accede y que el acceso requiere cuenta Google. El manifest no prueba estado activo.
-- La URL `/exec` estable se configura manualmente en `frontend/index.html` tras recibirla de Claudio; hasta entonces el botón está deshabilitado. Cambiarla requiere validar el destino. Nunca actualizar deployment con agente.
+- La URL `/exec` estable entregada por Claudio está configurada como destino del botón en `frontend/index.html`. Si cambia, validar la nueva URL y publicar la landing; no actualizar el deployment con agente.
 - Spreadsheet ID vive en Script Properties. Reconfiguración/cambio de hoja se hace con procedimiento manual y respaldo/confirmación; no resetear ni migrar datos.
 - Rollback de HtmlService: restaurar fuentes previas y publicar nueva versión manualmente. Rollback Pages: workflow de frontend del SHA anterior.

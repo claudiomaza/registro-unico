@@ -43,10 +43,11 @@ class ContractTests(unittest.TestCase):
         self.assertIn('PropertiesService.getScriptProperties()', self.code)
         self.assertNotIn("getSheetByName('Usuarios')", self.code)
 
-    def test_pages_is_only_a_link_and_does_not_collect_google_credentials(self):
+    def test_pages_links_to_configured_apps_script_without_collecting_credentials(self):
         page = (ROOT / 'frontend' / 'index.html').read_text().lower()
-        self.assertIn('Acceso todavía no configurado'.lower(), page)
-        self.assertIn('disabled aria-disabled="true"', page)
+        self.assertIn('https://script.google.com/macros/s/akfycbwsfdtvsxp6ecaae1zpjk7vzlibinpdpnuvs87qomml2tdzkqvxitljo3fap5mnfvqykw/exec', page)
+        self.assertIn('abrir aplicación', page)
+        self.assertNotIn('disabled aria-disabled="true"', page)
         self.assertNotIn('REEMPLAZAR_CON_ID', page)
         self.assertNotIn('google.accounts', page)
         self.assertNotIn('type="password"', page)

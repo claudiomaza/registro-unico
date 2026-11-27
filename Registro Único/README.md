@@ -19,7 +19,7 @@ CRUD web para mantener registros de personas en una planilla central de Google S
 3. Antes del deployment, en Apps Script > Configuración del proyecto > Propiedades del script, establecer `REGISTRO_UNICO_INITIAL_ADMIN_EMAIL` con el correo autorizado del administrador inicial. Esa configuración no se versiona. Luego iniciar sesión con esa cuenta, autorizar los scopes de Sheets e identidad y abrir `?page=admin`.
 4. En el panel, vincular el ID de la planilla. Se crea `Registros` y la fila de encabezados únicamente si la pestaña no existe o está vacía; si hay datos con encabezados distintos, se detiene sin sobrescribir. También se crea la pestaña `Acceso` con enlaces en forma de botón para abrir el CRUD y Administración. Si ya existe una pestaña `Acceso` con contenido propio, renombrala antes. Si la planilla ya estaba vinculada, usá **Agregar accesos en la hoja** desde el panel Admin.
 5. Publicar manualmente como Web app: ejecución como usuario que accede y acceso para usuarios con cuenta Google (no anónimo). Verificar estos ajustes en el diálogo del deployment; el manifest no demuestra que un deployment activo haya quedado configurado.
-6. Copiar la URL `/exec` estable en `frontend/index.html`, reemplazando `REEMPLAZAR_CON_ID_DEL_DEPLOYMENT`.
+6. La landing ya apunta al deployment `/exec` informado por Claudio. Si cambia, actualizar el `href` del botón en `frontend/index.html`.
 7. Para habilitar usuarios, desde Admin agregá correo/rol. El botón les concede Editor de Sheets. Para revocar se desactiva primero en la app y luego se quita el permiso individual de Sheets. El panel avisa que el acceso heredado por grupo/dominio debe revisarse aparte.
 
 ## Desarrollo y pruebas
@@ -34,7 +34,7 @@ No se conectan a Google, no usan credenciales ni escriben en una planilla. Para 
 
 ## Pages
 
-El workflow del repo `.github/workflows/pages.yml` publica exclusivamente `Registro Único/frontend/`, nunca `appscript/`. El usuario autorizó hacer público el repositorio. En tanto Claudio publique manualmente Apps Script y comparta su URL estable, la landing muestra el acceso deshabilitado; no contiene URL inventada, login propio ni datos personales. En GitHub Free, Pages está disponible desde repos públicos. Workflow y sitio se publican por separado del backend.
+El workflow del repo `.github/workflows/pages.yml` publica exclusivamente `Registro Único/frontend/`, nunca `appscript/`. El usuario autorizó hacer público el repositorio. La landing enlaza al deployment de Apps Script proporcionado por Claudio; no contiene login propio ni datos personales. En GitHub Free, Pages está disponible desde repos públicos. Workflow y sitio se publican por separado del backend.
 
 ## Versiones, permisos y rollback
 
