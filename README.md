@@ -1,5 +1,9 @@
 # Registro Único
 
-Landing estática publicada en GitHub Pages.
+Aplicación ubicada en [`Registro Único/`](Registro%20%C3%9Anico/), con esta estructura canónica:
 
-La fuente de la aplicación (Apps Script/HtmlService), su configuración y documentación están en [`Registro Único/`](Registro%20%C3%9Anico/) en la rama `feat/registro-unico-v1`. La landing queda inactiva hasta que Claudio publique Apps Script y configure su URL estable. Pages publica únicamente `Registro Único/frontend/`; no publica ni despliega Apps Script.
+- `Registro Único/appscript/`: Apps Script V8, `appsscript.json`, backend y vistas HtmlService.
+- `Registro Único/frontend/`: landing estática publicada por GitHub Pages.
+- `Registro Único/README.md`, `AGENT.md` y `SPEC.md`: instalación, decisiones y contrato del proyecto.
+
+`main` contiene la fuente integrada. La rama local única de desarrollo es `dev`; no se mantienen ramas feature adicionales. Apps Script no se despliega desde GitHub: Claudio lo publica manualmente. Consultá [`Registro Único/README.md`](Registro%20%C3%9Anico/README.md) para instalación, permisos, pruebas y despliegue.
