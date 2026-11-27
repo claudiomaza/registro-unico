@@ -4,7 +4,7 @@ CRUD web para mantener registros de personas en una planilla central de Google S
 
 ## Arquitectura y acceso
 
-- `appscript/`: backend Apps Script, pantalla HtmlService del CRUD y panel admin independiente (`?page=admin`).
+- `appscript/`: exactamente `appsscript.json`, `Code.gs`, `Index.html` y `Admin.html`. Toda la lógica y validación están en el único `.gs`; cada HTML lleva sus propios estilos. No hay includes ni archivos auxiliares requeridos.
 - `frontend/`: página estática sin login, secretos ni acceso a Sheets; solo enlaza al deployment estable de Apps Script.
 - Apps Script está configurado para ejecutarse como quien accede (`USER_DEPLOYING`) y requiere una cuenta Google (`ANYONE`, no acceso anónimo). Cada persona autoriza scopes de Sheets e identidad de email en su propia sesión. Como esta app standalone abre una planilla por ID, el scope declarado `spreadsheets` es amplio: Google lo asocia al acceso a hojas de cálculo del usuario, no únicamente a la hoja central. Revisar este consentimiento antes de publicar.
 - La lista interna de correos y roles vive en Script Properties. El primer administrador se elige mediante una Script Property privada y se inicializa al primer acceso. Roles: `admin`, `user1`, `user2`. Los dos últimos tienen los mismos permisos CRUD; solo `admin` gestiona usuarios y permisos de la planilla.
@@ -15,7 +15,7 @@ CRUD web para mantener registros de personas en una planilla central de Google S
 ## Configuración inicial
 
 1. Claudio crea una planilla sintética o autorizada y conserva su ID.
-2. En Apps Script, crea un proyecto independiente y copia los archivos versionados de `appscript/` (incluido `appsscript.json`). No autorices ni publiques desde este repositorio/agente.
+2. En Apps Script, crea un proyecto independiente y copia exactamente estos cuatro archivos de `appscript/`: `appsscript.json`, `Code.gs`, `Index.html` y `Admin.html`. No hay que crear archivos `Domain.gs` o `Styles.html`: los validadores ya están dentro de `Code.gs` y el CSS en cada HTML. Esto evita el error `No se encontró el archivo HTML llamado Styles`. No autorices ni publiques desde este repositorio/agente.
 3. Antes del deployment, en Apps Script > Configuración del proyecto > Propiedades del script, establecer `REGISTRO_UNICO_INITIAL_ADMIN_EMAIL` con el correo autorizado del administrador inicial. Esa configuración no se versiona. Luego iniciar sesión con esa cuenta, autorizar los scopes de Sheets e identidad y abrir `?page=admin`.
 4. En el panel, vincular el ID de la planilla. Se crea `Registros` y la fila de encabezados únicamente si la pestaña no existe o está vacía; si hay datos con encabezados distintos, se detiene sin sobrescribir. También se crea la pestaña `Acceso` con enlaces en forma de botón para abrir el CRUD y Administración. Si ya existe una pestaña `Acceso` con contenido propio, renombrala antes. Si la planilla ya estaba vinculada, usá **Agregar accesos en la hoja** desde el panel Admin.
 5. Publicar manualmente como Web app: ejecución como usuario que accede y acceso para usuarios con cuenta Google (no anónimo). Verificar estos ajustes en el diálogo del deployment; el manifest no demuestra que un deployment activo haya quedado configurado.

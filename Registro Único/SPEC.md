@@ -2,7 +2,7 @@
 
 ## Estructura canónica del repositorio
 
-La aplicación se mantiene dentro de `Registro Único/`: `appscript/` con `appsscript.json`, `Code.gs` y vistas/recursos de HtmlService; `frontend/` con la landing y fuentes asociadas; `README.md`, `AGENT.md` y `SPEC.md` al nivel de la carpeta de la app. No mover archivos del proyecto a la raíz del repositorio.
+La aplicación se mantiene dentro de `Registro Único/`: `appscript/` contiene exactamente `appsscript.json`, un único `Code.gs`, `Admin.html` y `Index.html`; toda la lógica de backend/validación está en Code.gs y los estilos son internos a cada HTML, sin `include()` ni archivos locales auxiliares. `frontend/` contiene la landing y fuentes asociadas; `README.md`, `AGENT.md` y `SPEC.md` al nivel de la carpeta de la app. No mover archivos del proyecto a la raíz del repositorio.
 
 ## Objetivo y usuarios
 

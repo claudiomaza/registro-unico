@@ -9,9 +9,24 @@ class ContractTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.code = (ROOT / 'appscript' / 'Code.gs').read_text()
-        cls.domain = (ROOT / 'appscript' / 'Domain.gs').read_text()
         cls.admin = (ROOT / 'appscript' / 'Admin.html').read_text()
         cls.manifest = json.loads((ROOT / 'appscript' / 'appsscript.json').read_text())
+
+    def test_htmlservice_package_is_self_contained(self):
+        appscript = ROOT / 'appscript'
+        self.assertFalse((appscript / 'Domain.gs').exists())
+        self.assertFalse((appscript / 'Styles.html').exists())
+        self.assertTrue((appscript / 'Code.gs').is_file())
+        self.assertEqual(sorted(p.name for p in appscript.iterdir()), ['Admin.html', 'Code.gs', 'Index.html', 'appsscript.json'])
+        self.assertEqual(sorted(p.name for p in appscript.glob('*.gs')), ['Code.gs'])
+        for name in ('Index.html', 'Admin.html'):
+            html = (appscript / name).read_text()
+            self.assertIn('<style>', html)
+            self.assertNotIn("include('Styles')", html)
+        for helper in ('normalizeEmail_', 'validateEmail_', 'validateRole_', 'validateRecord_'):
+            self.assertIn('function ' + helper, self.code)
+        for name in ('Index.html', 'Admin.html'):
+            self.assertNotIn('include(', (appscript / name).read_text())
 
     def test_web_app_runs_as_accessing_user_and_requires_google_account(self):
         self.assertEqual(self.manifest['webapp']['executeAs'], 'USER_DEPLOYING')
@@ -19,7 +34,7 @@ class ContractTests(unittest.TestCase):
 
     def test_initial_admin_is_exact_and_roles_are_allowlisted(self):
         self.assertIn("initialAdminKey: 'REGISTRO_UNICO_INITIAL_ADMIN_EMAIL'", self.code)
-        self.assertRegex(self.domain, r"\['admin',\s*'user1',\s*'user2'\]")
+        self.assertRegex(self.code, r"\['admin',\s*'user1',\s*'user2'\]")
 
     def test_every_data_operation_checks_active_app_user(self):
         for fn in ('apiListRecords', 'apiSaveRecord', 'apiDeleteRecord'):

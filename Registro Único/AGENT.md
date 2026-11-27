@@ -5,7 +5,7 @@
 - Repositorio: `https://github.com/claudiomaza/registro-unico`.
 - Carpeta canónica: `Registro Único/` (espacio y tilde incluidos).
 - `main` es la rama integrada. Mantener una sola rama de desarrollo local, `dev`; no crear ramas feature adicionales ni publicar Apps Script desde el agente.
-- `appscript/` es fuente manual del backend y ambas pantallas HtmlService. No crear, actualizar ni desplegar Apps Script como agente.
+- `appscript/` contiene solo `appsscript.json`, `Code.gs`, `Index.html` y `Admin.html`; validadores residen en Code.gs y estilos se embeben en cada HTML. Ningún include de archivo local. No crear, actualizar ni desplegar Apps Script como agente.
 - `frontend/` es fuente de la página de entrada estática; workflow raíz `.github/workflows/pages.yml` publica solo esta carpeta. Despliegue Pages separado. Repo público por autorización expresa de Claudio (2026-11-26); no agregar datos reales, IDs de hojas ni credenciales. Landing enlaza al deployment de Apps Script informado por Claudio.
 - No leer ni escribir datos reales, no ejecutar migraciones y no cambiar permisos de planillas reales en desarrollo. Usar fixtures/sheets sintéticas aisladas.
 
