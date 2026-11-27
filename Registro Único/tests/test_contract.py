@@ -60,7 +60,7 @@ class ContractTests(unittest.TestCase):
 
     def test_pages_links_to_configured_apps_script_without_collecting_credentials(self):
         page = (ROOT / 'frontend' / 'index.html').read_text().lower()
-        self.assertIn('https://script.google.com/macros/s/akfycbwsfdtvsxp6ecaae1zpjk7vzlibinpdpnuvs87qomml2tdzkqvxitljo3fap5mnfvqykw/exec', page)
+        self.assertIn('https://script.google.com/macros/s/akfycbxzpfntrgqwvhe69szf600kxxwqyktfp1k3c9-jt7phw70yp9_oexunlsgvcd6f7rr3jq/exec', page)
         self.assertIn('abrir aplicación', page)
         self.assertNotIn('disabled aria-disabled="true"', page)
         self.assertNotIn('REEMPLAZAR_CON_ID', page)
