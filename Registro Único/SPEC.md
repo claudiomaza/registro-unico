@@ -53,7 +53,7 @@ Pestaña `Registros`, encabezados exactos:
 
 Las primeras cuatro columnas de negocio son requisitos del producto; las restantes soportan identidad estable y auditoría mínima. ID UUID inmutable. Timestamps como fecha de Sheets. DNI string para preservar ceros iniciales; sin validación geográfica hasta definir regla. Las celdas de texto se guardan en formato texto y se escapan prefijos de fórmula. No se registran valores DNI en logs.
 
-ACL de usuarios en Script Properties: clave/versionado JSON con email normalizado, rol, estado activo y timestamp. No almacenar roles en la misma hoja que editores puedan alterar.
+ACL de usuarios en Script Properties: clave/versionado JSON con email normalizado, rol, estado activo y timestamp. `REGISTRO_UNICO_INITIAL_ADMIN_EMAIL` se configura por fuera del repo; si falta o no es una dirección válida, bootstrap falla con un mensaje que identifica la propiedad. No almacenar roles en la misma hoja que editores puedan alterar.
 
 ## Contratos
 

@@ -237,7 +237,16 @@ function users_() {
   var props = PropertiesService.getScriptProperties();
   var raw = props.getProperty(APP_.usersKey);
   if (!raw) {
-    var initialAdmin = validateEmail_(props.getProperty(APP_.initialAdminKey));
+    var initialAdminValue = normalizeEmail_(props.getProperty(APP_.initialAdminKey));
+    if (!initialAdminValue) {
+      throw new Error('Falta configurar la propiedad de script REGISTRO_UNICO_INITIAL_ADMIN_EMAIL con el correo de la cuenta administradora.');
+    }
+    var initialAdmin;
+    try {
+      initialAdmin = validateEmail_(initialAdminValue);
+    } catch (error) {
+      throw new Error('El valor de REGISTRO_UNICO_INITIAL_ADMIN_EMAIL no es un correo válido. Revisá las propiedades del script.');
+    }
     var seeded = {};
     seeded[initialAdmin] = { role: 'admin', active: true, updatedAt: new Date().toISOString() };
     props.setProperty(APP_.usersKey, JSON.stringify(seeded));

@@ -34,6 +34,8 @@ class ContractTests(unittest.TestCase):
 
     def test_initial_admin_is_exact_and_roles_are_allowlisted(self):
         self.assertIn("initialAdminKey: 'REGISTRO_UNICO_INITIAL_ADMIN_EMAIL'", self.code)
+        self.assertIn('Falta configurar la propiedad de script REGISTRO_UNICO_INITIAL_ADMIN_EMAIL', self.code)
+        self.assertIn('El valor de REGISTRO_UNICO_INITIAL_ADMIN_EMAIL no es un correo válido.', self.code)
         self.assertRegex(self.code, r"\['admin',\s*'user1',\s*'user2'\]")
 
     def test_every_data_operation_checks_active_app_user(self):
